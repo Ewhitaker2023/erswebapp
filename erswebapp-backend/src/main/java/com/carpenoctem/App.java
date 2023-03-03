@@ -26,6 +26,9 @@ public final class App {
 
             server.createContext("/", new FrontController());
 
+            server.setExecutor(null);
+            server.start();
+
         } catch (BindException e) {
             e.printStackTrace();
         } catch (IOException e) {

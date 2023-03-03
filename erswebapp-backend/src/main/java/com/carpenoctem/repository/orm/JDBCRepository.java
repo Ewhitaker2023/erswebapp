@@ -7,8 +7,8 @@ public abstract class JDBCRepository<T, ID> {
 
     public T save(T object) {
 
-        Connection connection = ConnectionUtil.getConnection();
-        try {
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            System.out.println("HERE2");
             String schema = connection.getSchema();
             System.out.println(schema);
 
