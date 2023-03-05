@@ -1,12 +1,13 @@
 package com.carpenoctem.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import com.carpenoctem.model.Employee;
+import com.carpenoctem.model.Employees;
 import com.carpenoctem.service.EmployeeService;
 import com.carpenoctem.util.StringBuilderUtil;
 import com.sun.net.httpserver.HttpExchange;
@@ -21,14 +22,27 @@ public class FrontController implements HttpHandler {
             System.out.println(requestBody);
 
             ObjectMapper mapper = new ObjectMapper();
-            Employee employee = mapper.readValue(requestBody, Employee.class);
-
-            System.out.println(employee.toString());
+            List<Employees> employees = mapper.readValue(requestBody,
+                    mapper.getTypeFactory().constructCollectionType(List.class, Employees.class));
 
             EmployeeService service = new EmployeeService();
-            employee = service.save(employee);
+            System.out.println("SELECT BY PK");
+            for (Employees e : employees) {
+                Employees employee = service.selectByPk(e);
+                System.out.println(employee.toString());
+            }
 
-            System.out.println(employee.toString());
+            System.out.println("SELECT ALL");
+            employees = service.selectAll();
+            for (Employees e : employees) {
+                System.out.println(e.toString());
+            }
+
+            System.out.println("SELECT ALL BY PK");
+            employees = service.selectAllByPk(employees);
+            for (Employees e : employees) {
+                System.out.println(e.toString());
+            }
 
             exchange.sendResponseHeaders(200, -1);
             exchange.close();

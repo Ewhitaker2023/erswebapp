@@ -1,9 +1,12 @@
 package com.carpenoctem.repository;
 
-import com.carpenoctem.model.Employee;
+import com.carpenoctem.model.Employees;
 import com.carpenoctem.repository.orm.JDBCRepository;
-import java.util.UUID;
 
-public class EmployeeRepository extends JDBCRepository<Employee, UUID> {
+public class EmployeeRepository extends JDBCRepository<Employees> {
+
+    public EmployeeRepository(Class<Employees> type) {
+        super(type);
+    }
 
 }

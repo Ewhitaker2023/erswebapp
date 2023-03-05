@@ -6,16 +6,16 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public abstract class Account {
+public abstract class Accounts {
     private UUID id;
     private String email;
     private String pass;
 
-    public Account() {
+    public Accounts() {
         super();
     }
 
-    public Account(UUID id, String email, String pass) {
+    public Accounts(UUID id, String email, String pass) {
         this.id = id;
         this.email = email;
         this.pass = pass;
